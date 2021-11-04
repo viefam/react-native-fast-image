@@ -20,6 +20,7 @@
     self = [super init];
     self.resizeMode = RCTResizeModeCover;
     self.clipsToBounds = YES;
+    SDImageCache.sharedImageCache.config.shouldCacheImagesInMemory = false;
     return self;
 }
 

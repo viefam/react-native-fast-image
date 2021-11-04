@@ -91,7 +91,7 @@ class FastImageViewConverter {
         final FastImageCacheControl cacheControl = FastImageViewConverter.getCacheControl(source);
         DiskCacheStrategy diskCacheStrategy = DiskCacheStrategy.AUTOMATIC;
         Boolean onlyFromCache = false;
-        Boolean skipMemoryCache = false;
+        Boolean skipMemoryCache = true;
         switch (cacheControl) {
             case WEB:
                 // If using none then OkHttp integration should be used for caching.
