@@ -158,7 +158,7 @@
         SDWebImageContext *context = @{SDWebImageContextDownloadRequestModifier : requestModifier};
         
         // Set priority.
-        SDWebImageOptions options = SDWebImageRetryFailed | SDWebImageHandleCookies;
+        SDWebImageOptions options = SDWebImageRetryFailed | SDWebImageHandleCookies | SDWebImageAvoidDecodeImage;
         switch (_source.priority) {
             case FFFPriorityLow:
                 options |= SDWebImageLowPriority;
@@ -197,9 +197,11 @@
 
 - (void)downloadImage:(FFFastImageSource *) source options:(SDWebImageOptions) options context:(SDWebImageContext *)context {
     __weak typeof(self) weakSelf = self; // Always use a weak reference to self in blocks
+    SDWebImageOptions newOptions = SDWebImageAvoidDecodeImage | options;
+
     [self sd_setImageWithURL:_source.url
             placeholderImage:nil
-                     options:options
+                     options:newOptions
                      context:context
                     progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
                         if (weakSelf.onFastImageProgress) {
